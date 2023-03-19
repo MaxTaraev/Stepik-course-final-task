@@ -7,8 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import os
 import time
 import math
-from pages.main_page import MainPage
-from pages.login_page import LoginPage
+from Pages.main_page import MainPage
+from Pages.login_page import LoginPage
 
 # pytest -v --tb=line --language=en test_main_page.py
 
