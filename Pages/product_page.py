@@ -24,14 +24,24 @@ class ProductPage(BasePage):
         return self.browser.find_element(
             *ProductPageLocators.ITEM_PRICE)
 
+    # НЕГАТИВНАЯ проверка на то, что нет сообщения о добавлении товара в корзину
     def should_not_be_added_to_cart_alert(self):
-        assert self.is_not_element_present(*ProductPageLocators.ITEM_ADDED_ALERT), "Added to cart alert is presented, expected not to be"
+        assert self.is_not_element_present(
+            *ProductPageLocators.ITEM_ADDED_ALERT), "Added to cart alert is presented, expected not to be"
+        print('Succes alert is not presented')
+
+    # Должно пропасть сообщение о том, что товар добавлен в корзину
+    def should_disappear_added_to_cart_alert(self):
+        assert self.is_disappeared(
+            *ProductPageLocators.ITEM_ADDED_ALERT), "Added to cart alert did not disappear"
+        pass
 
     # Есть ли сообщение о том, что товар добавлен в корзину
     def should_be_item_added_to_cart_alert(self):
         assert self.is_element_present(
             *ProductPageLocators.ITEM_ADDED_ALERT), 'Added to cart alert is missing'
-        print(self.browser.find_element(*ProductPageLocators.ITEM_ADDED_ALERT).text)
+        print(self.browser.find_element(
+            *ProductPageLocators.ITEM_ADDED_ALERT).text)
 
     # Правильное ли название товара в сообщение о его добавлении
     def should_be_correct_name_of_item_in_item_added_alert(self):
