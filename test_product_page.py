@@ -7,6 +7,39 @@ from Pages.basket_page import BasketPage
 # pytest -s -v --tb=line --language=en test_product_page.py
 
 
+class TestUserAddToBasketFromProductPage():
+
+    @pytest.fixture(scope='function', autouse=True)
+    def setup(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/'
+        email = str(time.time()) + "@fakemail.org"
+
+        login_page = LoginPage(browser, link)
+        login_page.open_page()
+        login_page.register_new_user(email=email, password='nt&aC4JaI72x')
+        login_page.should_be_authorized_user()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
+        # link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/{promo}'
+
+        product_page = ProductPage(browser, link)
+        product_page.open_page()
+        product_page.add_item_to_cart()
+        product_page.solve_quiz_and_get_code()
+        product_page.should_be_item_added_to_cart_alert()
+        product_page.should_be_correct_name_of_item_in_item_added_alert()
+        product_page.should_be_basket_total_alert()
+        product_page.should_be_correct_price_in_basket_total_alert()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/'
+
+        product_page = ProductPage(browser, link, timeout=0)
+        product_page.open_page()
+        product_page.should_not_be_added_to_cart_alert()
+
+
 # @pytest.mark.parametrize('promo', [
 #     '?promo=offer0',
 #     '?promo=offer1',
@@ -22,22 +55,6 @@ from Pages.basket_page import BasketPage
 # ])
 
 
-def test_guest_can_add_product_to_basket(browser):
-    link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
-    # link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/{promo}'
-    # print(link)
-
-    product_page = ProductPage(browser, link)
-    product_page.open_page()
-    product_page.add_item_to_cart()
-    product_page.solve_quiz_and_get_code()
-    # time.sleep(2)
-    product_page.should_be_item_added_to_cart_alert()
-    product_page.should_be_correct_name_of_item_in_item_added_alert()
-    product_page.should_be_basket_total_alert()
-    product_page.should_be_correct_price_in_basket_total_alert()
-
-
 @pytest.mark.skip
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/'
@@ -45,14 +62,6 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     product_page = ProductPage(browser, link, timeout=0)
     product_page.open_page()
     product_page.add_item_to_cart()
-    product_page.should_not_be_added_to_cart_alert()
-
-
-def test_guest_cant_see_success_message(browser):
-    link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/'
-
-    product_page = ProductPage(browser, link, timeout=0)
-    product_page.open_page()
     product_page.should_not_be_added_to_cart_alert()
 
 
