@@ -4,7 +4,6 @@ from Pages.basket_page import BasketPage
 import pytest
 
 
-# pytest -v --tb=line --language=en test_main_page.py
 @pytest.mark.login_guest
 class TestLoginFromMainPage():
 

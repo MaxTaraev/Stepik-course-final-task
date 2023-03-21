@@ -1,10 +1,6 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators():
-    pass
-
-
 class LoginPageLocators():
     REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
@@ -24,7 +20,6 @@ class ProductPageLocators():
         By.CSS_SELECTOR, "#messages > .alert-success:second-child > .alertinner")
 
     ITEM_NAME = (By.CSS_SELECTOR, ".product_main > h1:first-child")
-
     ITEM_PRICE = (By.CSS_SELECTOR, ".product_main > .price_color")
 
     BASKET_TOTAL_ALERT = (

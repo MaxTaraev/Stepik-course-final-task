@@ -39,12 +39,9 @@ class ProductPage(BasePage):
     def should_be_item_added_to_cart_alert(self):
         assert self.is_element_present(
             *ProductPageLocators.ITEM_ADDED_ALERT), 'Added to cart alert is missing'
-        # print(self.browser.find_element(
-        #     *ProductPageLocators.ITEM_ADDED_ALERT).text)
 
     # Правильное ли название товара в сообщение о его добавлении
     def should_be_correct_name_of_item_in_item_added_alert(self):
-        # print(self.get_item_name().text)
         assert self.get_item_name().text == self.browser.find_element(
             *ProductPageLocators.ITEM_ADDED_ALERT).text, 'Incorrect name of item in added to cart alert'
 
@@ -52,11 +49,8 @@ class ProductPage(BasePage):
     def should_be_basket_total_alert(self):
         assert self.is_element_present(
             *ProductPageLocators.BASKET_TOTAL_ALERT), 'Basket total alert is missing'
-        # print(self.browser.find_element(
-        #     *ProductPageLocators.BASKET_TOTAL_ALERT).text)
 
     # Правильная ли цена в сообщении о стоимости корзины
     def should_be_correct_price_in_basket_total_alert(self):
-        # print(self.get_item_price().text)
         assert self.get_item_price().text == self.browser.find_element(
             *ProductPageLocators.BASKET_TOTAL_ALERT).text, 'Incorrect price of item in basket total alert'

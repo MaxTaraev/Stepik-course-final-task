@@ -15,11 +15,11 @@ class LoginPage(BasePage):
 
     def should_be_login_form(self):
         assert self.is_element_present(
-            *LoginPageLocators.LOGIN_FORM), "Login form is not present"
+            *LoginPageLocators.LOGIN_FORM), "Login form is missing"
 
     def should_be_register_form(self):
         assert self.is_element_present(
-            *LoginPageLocators.REGISTER_FORM), "Registration form is not present"
+            *LoginPageLocators.REGISTER_FORM), "Registration form is missing"
 
     def register_new_user(self, email, password):
         assert self.is_element_present(
